@@ -36,7 +36,7 @@ jobs:
       working-directory: ./esp-idf
       run: sh ./install.sh
       env:
-        IDF_TOOLS_PATH : "/home/runner/work/BlueRetro/BlueRetro/BlueRetroRoot/"
+        IDF_TOOLS_PATH : "{{ env.GITHUB_WORKSPACE }}/BlueRetroRoot/"
     - name: Build with ESP-IDF
       working-directory: ./BlueRetro
       run: |
@@ -47,7 +47,7 @@ jobs:
         cp configs/dbg/qemu sdkconfig
         idf.py build
       env:
-        IDF_TOOLS_PATH : "/home/runner/work/BlueRetro/BlueRetro/BlueRetroRoot/"
+        IDF_TOOLS_PATH : "{{ env.GITHUB_WORKSPACE }}/BlueRetroRoot/"
     - name: Setup QEMU
       working-directory: /home/runner/work
       run: |
@@ -64,4 +64,4 @@ jobs:
         pip install pytest
         pytest
       env:
-        IDF_TOOLS_PATH : "/home/runner/work/BlueRetro/BlueRetro/BlueRetroRoot/"
+        IDF_TOOLS_PATH : "{{ env.GITHUB_WORKSPACE }}/BlueRetroRoot/"
