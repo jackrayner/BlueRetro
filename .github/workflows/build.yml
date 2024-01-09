@@ -31,8 +31,7 @@ jobs:
     steps:
     - name: Install ESP-IDF prerequisite
       run: |
-        apt-get update
-        apt-get install -y lsb-release
+        apt-get update && apt-get install -y lsb-release software-properties-common
         add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
         apt-get update -y -qq
         apt-get install -y git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util

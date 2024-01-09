@@ -9,15 +9,18 @@ on:
 jobs:
   build:
     runs-on: self-hosted
+    container:
+      image: ubuntu:focal
 
     steps:
     - name: Install ESP-IDF prerequisite
       run: |
-        sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
-        sudo apt-get update -y -qq
-        sudo apt-get install -y git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util
+        apt-get update && apt-get install -y lsb-release software-properties-common
+        add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
+        apt-get update -y -qq
+        apt-get install -y git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util
     - name: Set python3 default
-      run: sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10 && alias pip=pip3
+      run: update-alternatives --install /usr/bin/python python /usr/bin/python3 10 && alias pip=pip3
     - name: Clone BlueRetroRoot
       run: git clone https://github.com/darthcloud/BlueRetroRoot.git .
     - name: Fetch submodules
@@ -50,7 +53,7 @@ jobs:
       run: |
         curl -L $(curl -s https://api.github.com/repos/espressif/qemu/releases/latest | jq '.assets[] | select(.name|match("xtensa")) | select(.name|match("x86_64")) | select(.name|match("linux")) | .browser_download_url' | tr -d '"') | tar xJ
         echo "${{ env.GITHUB_WORKSPACE }}/../..//qemu/bin" >> $GITHUB_PATH
-        sudo apt-get install -y libslirp0 libsdl2-2.0-0
+        apt-get install -y libslirp0 libsdl2-2.0-0
     - name: Run pytest
       working-directory: ./BlueRetro
       run: |
