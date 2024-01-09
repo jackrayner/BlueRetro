@@ -25,6 +25,8 @@ jobs:
           - hw_version: dbg
             br_config: qemu_bt_trace_replay_test
     runs-on: self-hosted
+    container:
+      image: ubuntu:focal
 
     steps:
     - name: Install ESP-IDF prerequisite
