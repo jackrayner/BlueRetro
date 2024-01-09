@@ -52,7 +52,7 @@ jobs:
       working-directory: ./esp-idf
       run: sh ./install.sh
       env:
-        IDF_TOOLS_PATH : "${{ env.GITHUB_WORKSPACE }}/BlueRetroRoot/"
+        IDF_TOOLS_PATH : "${{ github.workspace }}/BlueRetroRoot/"
     - name: Build with ESP-IDF
       working-directory: ./BlueRetro
       run: |
@@ -64,7 +64,7 @@ jobs:
         cp configs/${{ matrix.hw_version }}/${{ matrix.br_config }} sdkconfig
         BR_HW=_${{ matrix.hw_version }} BR_SYS=_${{ matrix.br_config }} idf.py reconfigure build
       env:
-        IDF_TOOLS_PATH : "${{ env.GITHUB_WORKSPACE }}/BlueRetroRoot/"
+        IDF_TOOLS_PATH : "${{ github.workspace }}/BlueRetroRoot/"
     - name: Copy OTA initial binary
       working-directory: ./BlueRetro/build
       run: |
