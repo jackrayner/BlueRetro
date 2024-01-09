@@ -33,7 +33,7 @@ jobs:
       working-directory: ./esp-idf
       run: sh ./install.sh
       env:
-        IDF_TOOLS_PATH : "/home/runner/work/BlueRetro/BlueRetro/BlueRetroRoot/"
+        IDF_TOOLS_PATH : "${{ env.GITHUB_WORKSPACE }}/../..//BlueRetro/BlueRetro/BlueRetroRoot/"
     - name: Build with ESP-IDF
       working-directory: ./BlueRetro
       run: |
@@ -44,12 +44,12 @@ jobs:
         cp configs/dbg/qemu sdkconfig
         idf.py build
       env:
-        IDF_TOOLS_PATH : "/home/runner/work/BlueRetro/BlueRetro/BlueRetroRoot/"
+        IDF_TOOLS_PATH : "${{ env.GITHUB_WORKSPACE }}/../..//BlueRetro/BlueRetro/BlueRetroRoot/"
     - name: Setup QEMU
-      working-directory: /home/runner/work
+      working-directory: ${{ env.GITHUB_WORKSPACE }}/../../
       run: |
         curl -L $(curl -s https://api.github.com/repos/espressif/qemu/releases/latest | jq '.assets[] | select(.name|match("xtensa")) | select(.name|match("x86_64")) | select(.name|match("linux")) | .browser_download_url' | tr -d '"') | tar xJ
-        echo "/home/runner/work/qemu/bin" >> $GITHUB_PATH
+        echo "${{ env.GITHUB_WORKSPACE }}/../..//qemu/bin" >> $GITHUB_PATH
         sudo apt-get install -y libslirp0 libsdl2-2.0-0
     - name: Run pytest
       working-directory: ./BlueRetro
@@ -61,4 +61,4 @@ jobs:
         pip install pytest
         pytest
       env:
-        IDF_TOOLS_PATH : "/home/runner/work/BlueRetro/BlueRetro/BlueRetroRoot/"
+        IDF_TOOLS_PATH : "${{ env.GITHUB_WORKSPACE }}/../..//BlueRetro/BlueRetro/BlueRetroRoot/"

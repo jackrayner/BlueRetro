@@ -38,7 +38,7 @@ jobs:
       working-directory: ./esp-idf
       run: sh ./install.sh
       env:
-        IDF_TOOLS_PATH : "/home/runner/work/BlueRetro/BlueRetro/BlueRetroRoot/"
+        IDF_TOOLS_PATH : "${{ env.GITHUB_WORKSPACE }}/../..//BlueRetro/BlueRetro/BlueRetroRoot/"
     - name: Build with ESP-IDF
       working-directory: ./BlueRetro
       run: |
@@ -49,7 +49,7 @@ jobs:
         cp configs/${{ github.event.inputs.hw_version }}/${{ github.event.inputs.br_config }} sdkconfig
         BR_HW=_${{ github.event.inputs.hw_version }} BR_SYS=_${{ github.event.inputs.br_config }} idf.py build
       env:
-        IDF_TOOLS_PATH : "/home/runner/work/BlueRetro/BlueRetro/BlueRetroRoot/"
+        IDF_TOOLS_PATH : "${{ env.GITHUB_WORKSPACE }}/../..//BlueRetro/BlueRetro/BlueRetroRoot/"
     - name: Copy OTA initial binary
       working-directory: ./BlueRetro/build
       run: |
