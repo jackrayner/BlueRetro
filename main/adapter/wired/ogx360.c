@@ -90,7 +90,6 @@ typedef struct __attribute__((packed)) usbd_duke_in
 
 void ogx360_acc_toggle_fb(uint32_t wired_id, uint16_t left_motor, uint16_t right_motor);
 
-
 void ogx360_meta_init(struct wired_ctrl *ctrl_data) {
     memset((void *)ctrl_data, 0, sizeof(*ctrl_data)*4);
 
