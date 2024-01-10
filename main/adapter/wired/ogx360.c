@@ -113,13 +113,13 @@ void ogx360_meta_init(struct wired_ctrl *ctrl_data) {
 }
 
 
-void ogx360_from_generic(int32_t dev_mode, struct wired_ctrl *ctrl_data, struct wired_data *wired_data) {
+void ogx360_from_wired_ctrl(int32_t dev_mode, struct wired_ctrl *ctrl_data, struct wired_data *wired_data) {
     struct usbd_duke_out *duke_out = (struct usbd_duke_out*) wired_data->output;
     struct usbd_duke_in *duke_in = (struct usbd_duke_in*) wired_data->output;
 
     //Start Rumble
     struct bt_data *bt_data = &bt_adapter.data[wired_data->index];
-    if ( bt_data->pids->type == BT_XBOX) // Rumble is hanging PS4 controllers, untested on the rest.
+    if ( bt_data->base.pids->type == BT_XBOX) // Rumble is hanging PS4 controllers, untested on the rest.
     {
         if (duke_in->startByte == 0x00 && duke_in->bLength == 6)
         {
