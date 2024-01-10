@@ -82,3 +82,4 @@ jobs:
             BlueRetro/build/ota/ota_data_initial.bin
             BlueRetro/build/BlueRetro*.bin
           if-no-files-found: error
+
