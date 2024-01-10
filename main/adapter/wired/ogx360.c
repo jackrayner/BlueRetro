@@ -209,7 +209,7 @@ void ogx360_acc_toggle_fb(uint32_t wired_id, uint16_t left_motor, uint16_t right
             fb_data.left_motor = left_motor << 16 ;
             fb_data.right_motor = right_motor << 16;
             wireless_fb_from_generic(&fb_data, bt_data);
-            bt_hid_feedback(device, bt_data->output);
+            bt_hid_feedback(device, bt_data->base.output);
         }
     }
 }
