@@ -49,10 +49,10 @@ jobs:
       env:
         IDF_TOOLS_PATH : "${{ github.workspace }}/BlueRetroRoot/"
     - name: Setup QEMU
-      working-directory: ${{ github.workspace }}../../
+      working-directory: ${{ github.workspace }}/../../
       run: |
         curl -L $(curl -s https://api.github.com/repos/espressif/qemu/releases/latest | jq '.assets[] | select(.name|match("xtensa")) | select(.name|match("x86_64")) | select(.name|match("linux")) | .browser_download_url' | tr -d '"') | tar xJ
-        echo "${{ github.workspace }}../../qemu/bin" >> $GITHUB_PATH
+        echo "${{ github.workspace }}/../../qemu/bin" >> $GITHUB_PATH
         sudo apt-get install libslirp0 libsdl2-2.0-0
     - name: Run pytest
       working-directory: ./BlueRetro
