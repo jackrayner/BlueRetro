@@ -61,13 +61,11 @@ jobs:
         run: |
           . ../esp-idf/export.sh
           echo "br_version=$(git describe --always --tags --dirty)" >> $GITHUB_ENV
-          mkdir ${{ env.br_version }}_${{ matrix.hw_version }}
-          cd ${{ env.br_version }}_${{ matrix.hw_version }}
-          rm -fr build
+          rm -fr build/${{ env.br_version }}_${{ matrix.hw_version }}
           echo "$(git describe --always --tags --dirty) ${{ matrix.hw_version }} ${{ matrix.br_config }}" | cut -c -31 > version.txt
           cat version.txt
-          cp ../configs/${{ matrix.hw_version }}/${{ matrix.br_config }} sdkconfig
-          BR_HW=_${{ matrix.hw_version }} BR_SYS=_${{ matrix.br_config }} idf.py reconfigure build
+          cp configs/${{ matrix.hw_version }}/${{ matrix.br_config }} sdkconfig
+          BR_HW=_${{ matrix.hw_version }} BR_SYS=_${{ matrix.br_config }} idf.py -B build/${{ env.br_version }}_${{ matrix.hw_version }} reconfigure build
         env:
           IDF_TOOLS_PATH : "${{ github.workspace }}/BlueRetroRoot/"
       - name: Copy OTA initial binary
@@ -80,9 +78,9 @@ jobs:
         with:
           name: ${{ env.br_version }}_${{ matrix.hw_version }}
           path: |
-            BlueRetro/${{ env.br_version }}_${{ matrix.hw_version }}/build/partition_table/partition-table.bin
-            BlueRetro/${{ env.br_version }}_${{ matrix.hw_version }}/build/bootloader/bootloader.bin
-            BlueRetro/${{ env.br_version }}_${{ matrix.hw_version }}/build/ota/ota_data_initial.bin
-            BlueRetro/${{ env.br_version }}_${{ matrix.hw_version }}/build/BlueRetro*.bin
+            BlueRetro/build/${{ env.br_version }}_${{ matrix.hw_version }}/partition_table/partition-table.bin
+            BlueRetro/build/${{ env.br_version }}_${{ matrix.hw_version }}/bootloader/bootloader.bin
+            BlueRetro/build/${{ env.br_version }}_${{ matrix.hw_version }}/ota/ota_data_initial.bin
+            BlueRetro/build/${{ env.br_version }}_${{ matrix.hw_version }}/BlueRetro*.bin
           if-no-files-found: error
 
