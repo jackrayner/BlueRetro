@@ -80,7 +80,7 @@ static const wired_init_t wired_init[WIRED_MAX] = {
     NULL, /* PARALLEL_1P_OD */
     NULL, /* PARALLEL_2P_OD */
     NULL, /* SEA_BOARD */
-	NULL, /* OGX360 */
+    NULL, /* OGX360 */
 };
 
 static const wired_port_cfg_t wired_port_cfg[WIRED_MAX] = {

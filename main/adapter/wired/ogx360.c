@@ -117,6 +117,7 @@ void ogx360_from_wired_ctrl(int32_t dev_mode, struct wired_ctrl *ctrl_data, stru
     struct usbd_duke_out *duke_out = (struct usbd_duke_out*) wired_data->output;
     struct usbd_duke_in *duke_in = (struct usbd_duke_in*) wired_data->output;
 
+    //TODO: Fix and test rumble
     //Start Rumble
     struct bt_data *bt_data = &bt_adapter.data[wired_data->index];
     if ( bt_data->base.pids->type == BT_XBOX) // Rumble is hanging PS4 controllers, untested on the rest.

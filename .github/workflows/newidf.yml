@@ -12,7 +12,7 @@ jobs:
         br_config:
           [3do, cdi, dreamcast, gamecube, gbahd, genesis, jaguar, jvs_arcade, n64, nes,
           parallel_1p, parallel_1p_3v3, parallel_2p, parallel_2p_3v3, pc_engine, pcfx,
-          playstation, saturn, snes, universal, virtualboy, wii_extension]
+          playstation, saturn, snes, universal, virtualboy, wii_extension, ogx360]
         include:
           - hw_version: dbg
             br_config: pad_test
@@ -22,7 +22,7 @@ jobs:
             br_config: qemu_bt_trace_replay
           - hw_version: dbg
             br_config: qemu_bt_trace_replay_test
-    runs-on: self-hosted
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Clean working directory

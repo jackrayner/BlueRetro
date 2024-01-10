@@ -56,7 +56,7 @@ void ogx360_process(uint8_t player)
                 esp_err_t result = i2c_master_write_to_device(I2C_NUM_0, player + 1, (void*)&wired_adapter.data[player].output, 21, 1);
                 if (result != ESP_OK) ets_printf("OGX360 write result: %d Index: %d\n",result,player);
                 if (result == 0)
-                {    
+                {
                     memset((void*)&wired_adapter.data[player].output,0,7);
                     result = i2c_master_read_from_device(I2C_NUM_0,player + 1, (void*)&wired_adapter.data[player].output, 7, 1048575);
                     if (result != ESP_OK) ets_printf("OGX360 read result: %d Index: %d\n",result,player);
