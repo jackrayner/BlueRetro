@@ -22,7 +22,7 @@ jobs:
             br_config: qemu_bt_trace_replay
           - hw_version: dbg
             br_config: qemu_bt_trace_replay_test
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
     - name: Clean working directory
